@@ -1,8 +1,6 @@
 package rocks.zipcode.atm;
-
 import rocks.zipcode.atm.bank.AccountData;
 import rocks.zipcode.atm.bank.Bank;
-
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -13,6 +11,7 @@ public class CashMachine {
 
     private final Bank bank;
     private AccountData accountData = null;
+    private String error = "";
 
     public CashMachine(Bank bank) {
         this.bank = bank;
@@ -55,8 +54,14 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
-    }
+        if (!error.equals("")){
+            String errormessage = error;
+            error = "";
+            return errormessage;
+        } else {
+            return accountData.toString();
+        }
+         }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
         try {
@@ -70,6 +75,7 @@ public class CashMachine {
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            error = e.getMessage();
         }
     }
 }

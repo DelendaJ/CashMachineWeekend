@@ -14,11 +14,19 @@ public class Bank {
 
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
-                1000, "Example 1", "example1@gmail.com", 500
+                1000, "Justin Isaac", "strugglingcollegestudent@gmail.com", 27
         )));
 
-        accounts.put(2000, new PremiumAccount(new AccountData(
-                2000, "Example 2", "example2@gmail.com", 200
+        accounts.put(1001, new PremiumAccount(new AccountData(
+                1001, "Leona Winterbottom", "LDub@corporateindustries.com", 7184666
+        )));
+
+        accounts.put(1002, new BasicAccount(new AccountData(
+                1002, "Karen Grumby", "winetime@yahoo.com", 4200
+        )));
+
+        accounts.put(1003, new BasicAccount(new AccountData(
+                1003, "James Maverick", "jim@maverickhomeimprovement.com", 8227
         )));
     }
 
@@ -28,7 +36,7 @@ public class Bank {
         if (account != null) {
             return ActionResult.success(account.getAccountData());
         } else {
-            return ActionResult.fail("No account with id: " + id + "\nTry account 1000 or 2000");
+            return ActionResult.fail("Swiper No Swiping.");
         }
     }
 
@@ -46,7 +54,7 @@ public class Bank {
         if (ok) {
             return ActionResult.success(account.getAccountData());
         } else {
-            return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
+            return ActionResult.fail("Whoa there, buddy! You can't withdraw " + amount + " when you have " + account.getBalance() + " in your account.");
         }
     }
 }
